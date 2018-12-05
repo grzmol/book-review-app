@@ -55,6 +55,20 @@ userSchema.pre('save', function(next){
 
 })
 
+userSchema.statics.findByToken = function(token,cb){
+
+    var user = this;
+
+    jwt.verify(token, config.SECRET, (err,decode)=>{
+        user.findOne({"_id": decode,"token":token}, function(err,user){
+            if(err) return cb(err);
+            cb(null,user);
+        })
+
+    })
+}
+
+
 
 
 userSchema.methods.comparePassword = function comparePassword(candidatePassword, cb){
@@ -62,8 +76,6 @@ userSchema.methods.comparePassword = function comparePassword(candidatePassword,
         if(err) return cb(err);
         cb(null, same);
     })
-
-
 }
 
 
@@ -77,5 +89,19 @@ userSchema.methods.generateToken = function generateToken(cb){
         cb(null, user);
     })
 }
+
+
+userSchema.methods.deleteToken = function(token, cb){
+    var user = this;
+
+    user.update({$unset: {token:1}}, (err,user)=>{
+        if(err) return cb(err);
+        cb(null,user);
+    })
+}
+
+
+
+
 const User = mongoose.model('User', userSchema);
 module.exports = { User };

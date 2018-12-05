@@ -11,7 +11,10 @@ mongoose.connect(config.DATABASE, {useNewUrlParser: true});
 
 
 const { User } = require('./models/user')
-const { Book } = require('./models/book');
+const { Book } = require('./models/book')
+
+
+const {auth} = require('./middleware/auth')
 
 
 app.use(bodyParser.json());
@@ -41,7 +44,7 @@ app.get('/api/books', (req,res)=>{
 })
 
 
-app.get('/api/user/getById', (req,res)=>{
+app.get('/api/user/getbyid', (req,res)=>{
     let id = req.query.id;
 
     User.findById(id,(err,user) =>{
@@ -62,6 +65,12 @@ app.get('/api/users', (req,res)=>{
     })
 })
 
+app.get('/api/user_reviews', (req, res)=>{
+    Book.find({ownerId:req.query.user}).exec((err,reviews)=>{
+        if(err) return res.status(400).send(err);
+        res.send(reviews);
+    })
+})
 // POST //
 app.post('/api/book', (req,res) =>{
     const book = new Book(req.body)
@@ -123,6 +132,12 @@ app.post('/api/user/login', (req, res) => {
     })
 });
 
+app.get('/api/user/logout', auth ,(req,res) =>{
+    req.user.deleteToken(req.token, (err, user) =>{
+        if(err) return res.status(400).send(err);
+        res.status(200); 
+    })
+})
 // UPDATE //
 
 app.post('/api/book_update', (req,res) =>{
