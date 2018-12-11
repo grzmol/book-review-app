@@ -1,7 +1,8 @@
 {
-  "name": "shoprx",
+  "name": "book-shelf",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:3001",
   "dependencies": {
     "axios": "^0.17.1",
     "react": "^16.6.3",

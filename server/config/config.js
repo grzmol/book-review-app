@@ -3,7 +3,7 @@ const config = {
         SECRET: process.env.SECRET,
         DATABASE: process.env.MONGODB_URI
     },
-    default:{
+    default: {
         SECRET: 'wow-such-secret-wow',
         DATABASE: 'mongodb://localhost:27017/booksShelf'
     }
@@ -12,6 +12,6 @@ const config = {
 
 
 
-exports.get = function get(env){
+exports.get = function get(env) {
     return config[env] || config.default;
 }
