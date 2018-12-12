@@ -16,21 +16,21 @@ const SidenavItems = () => {
         },
         {
             type: 'navItem',
-            icon: 'file-text-o',
+            icon: 'user',
             text: 'My Profile',
             link: '/user',
             restricted: false
         },
         {
             type: 'navItem',
-            icon: 'file-text-o',
+            icon: 'plus-square',
             text: 'Add Admins',
             link: '/user/register',
             restricted: false
         },
         {
             type: 'navItem',
-            icon: 'fa-sign-in',
+            icon: 'sign-in',
             text: 'Login',
             link: '/login',
             restricted: false
@@ -44,7 +44,7 @@ const SidenavItems = () => {
         },
         {
             type: 'navItem',
-            icon: 'fa-sign-out',
+            icon: 'sign-out',
             text: 'Logout',
             link: '/user/logout',
             restricted: false
@@ -53,25 +53,25 @@ const SidenavItems = () => {
 
     const element = (item, i) => (
         <div key={i} className={item.type}>
-            <Link to={item.link}>
-                <FontAwesome name={item.icon} />
-                {item.text}
-            </Link>
-        </div>
-    )
-
-
-    const showItems = () => {
-        items.map((item, i) => {
-            return element(item, i)
-        })
-    }
-
-    return (
-        <div>
-            {showItems()}
-        </div>
+        <Link to={item.link}>
+            <FontAwesome name={item.icon}/>
+            {item.text}
+        </Link>
+    </div>
     );
-}
+
+    const list = [];
+    const showItems = () => {
+        for(let i=0;i<items.length;i++){
+            list.push(element(items[i], i));
+        }
+
+    };
+
+    return <div>
+        {showItems()}
+        {list}
+    </div>;
+};
 
 export default SidenavItems;
