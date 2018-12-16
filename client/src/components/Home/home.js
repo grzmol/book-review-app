@@ -3,7 +3,6 @@ import HomeContainer from '../../containers/home_container';
 const Home = () => {
     return (
         <div>
-            HOME
             <HomeContainer/>
         </div>
     );
