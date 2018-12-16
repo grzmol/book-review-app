@@ -2,7 +2,11 @@
   "name": "book-shelf",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:3001",
+  "proxy": {
+    "/api/":{
+        "target":"http://localhost:3001"
+    }
+  },
   "dependencies": {
     "axios": "^0.17.1",
     "react": "^16.6.3",
@@ -25,6 +29,7 @@
   "eslintConfig": {
     "extends": "react-app"
   },
+
   "browserslist": [
     ">0.2%",
     "not dead",
