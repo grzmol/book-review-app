@@ -44,7 +44,7 @@ app.get('/api/books', (req, res) => {
 })
 
 
-app.get('/api/user/getbyid', (req, res) => {
+app.get('/api/getReviewer', (req, res) => {
     let id = req.query.id;
 
     User.findById(id, (err, user) => {
