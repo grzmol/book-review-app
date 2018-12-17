@@ -46,13 +46,20 @@ export function getBookWithReviewer(id) {
                     }
 
                     dispatch({
-                        type: 'GET_BOOK_WITH_REVIEWER',
+                        type: 'GET_BOOKS_WITH_REVIEWER',
                         payload: response
                     })
                 })
         })
     }
+}
 
-
-
+export function clearBookWithReviewer(){
+    return{
+        type: 'CLEAR_BOOKS_WITH_REVIEWER',
+        payload:{
+            book:{},
+            reviewer: {}
+        }
+    }
 }

@@ -10,6 +10,7 @@ class HomeContainer extends Component {
     componentWillMount() {
         this.props.dispatch(getBooks(5, 0, 'desc'));
     };
+    
 
     renderItems = (books) => (
         books.list ? books.list.map(item => (
